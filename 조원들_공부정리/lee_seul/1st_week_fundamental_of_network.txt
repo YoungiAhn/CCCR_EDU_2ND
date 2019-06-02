@@ -156,3 +156,95 @@ switch - moder and commonly used
 	1 Physical layer           bit (composed of 0 and 1) 
                                         
              0 Transmission medium       
+
+
+15. collision domain 
+- collision이 일어날 수 있는 도메인
+- hub - half duplex 사용함
+- switch - half&full duplex 사용함. -> collision domain을 분리
+
+
+16. Switch 
+- 허브의 확장된 개념으로 기본 기능은 허브와 동일하지만 전송 중 패킷의 충돌이 일어나지 않도록 패킷의 목적지로 지정할 포트를 직접 전송한다.
+- Switching : 스위치에서 패킷의 목적지 주소를 기준으로 보내는 곳과 받는 곳 계산, 해당 포트 1:1 연결
+- keyword : learning, flooding
+
+port | MAC | time
+---------------------
+1     | Ad
+2     |
+3     |
+4     |
+
+- src mac adr, dst mac adr를 mac adr table 에 저장
+- 데이터를 보내면 mac table 참고 하고 flooding(broadcast) 한다 
+- mac adr는 FF:FF:FF:FF:FF:FF로 해서 broadcast 해서 flooding 해주고 dst mac adr를 스위치에서 데이터 안에 넣어둔다.
+- 데이터 안에 있는 주소를 모두에게 물어서 dst mac adr를 찾아가게 된다.
+- 자신의 mac table에 없다는 것을 확인하고 없으면 패킷 버리고 (아니면 대답도 안해주고 전단지 버림 ㅠㅠ)
+- 자신의 mac table에 있다면 respond 해준다.
+- 전송 후 일정시간 지나면 캐시 지워진다.
+
+
+1) learning 
+- Switch로 유입된 Frame의 Source MAC address를 기반으로 MAC address table을 생성하는 기능.
+
+2) Forwarding 
+- Switch로 유입된 Frame의 Destination MAC address를 MAC address table에서 검색(Lookup)하여 MAC address table에 존재하는 경우, 해당 MAC address가 연결되어 있는 Port로만 Frame을 전송하는 기능
+
+3) Filtering	
+- Filtering 기능은 두가지가 있는데, 하나는 Frame이 유입된 Port로 다시 Frame을 전송하는 않는 기능이고, 다른 하나는 MAC address table에 Destination MAC address가 존재하는 경우 해당 MAC address가 연결되어 있지 않은 Port로는 Frame을 전송하지 않는 기능이다.
+
+4)Flooding
+- Switch로 유입된 Frame의 Destination MAC address를 MAC address table에서 검색(Lookup)하여 MAC address table에 존재하지 않는 경우, Frame이 유입된 Port를 제외한 모든 Port로 Frame이 전송하는 기능이다
+
+
+
+17. IP address
+IP address 체계
+
+A class 0xxxxxxx  1~127  IP를 많이 써야 하는 회사들  N.H.H.H ( 네트워크 아이디 + 호스트 아이디 *n)
+B class 10xxxxxx  128~191   그 담 회사                   N.N.H.H
+C class 110xxxxx  192~223     우리집...                    N.N.N.H
+D class 1110xxxx  멀티캐스트 위해 예약 
+E class  1111xxxx  실험/연구용
+
+각 클래스마다 각 아이피 0000000(0)은 대표, 11111111(255)은 브로드캐스트로 사용
+그리고 나머지 하나는 게이트웨이로 사용하는데 보통 1이나 254를 사용
+ex) iptime gateway ip : 192.168.0.1
+
+
+A class
+
+AND     127.0.1.1       = 01111111.00000000.00000001.00000001
+        subnet mask     = 11111111.00000000.00000001.00000001
+--------------------------------------------------------------
+result  subnet network  = 01111111.00000000.00000000.00000000
+
+AND 연산으로 서브넷 계산
+
+
+18. 서브넷
+- 대역폭을 나눠서 절약적 ip 대역대를 나눌 때 사용
+- 집에선 잘 안쓴다
+- 그렇게 아이피 대역대를 나누는 것을 서브넷팅이라고 함.
+- 서브넷마스크 기준이 되는 것 
+  ex) prefix : 24 (각 주소의 bit 에 들어간 1의 개수를 센 것)
+      subnet mask 255.255.255.0
+  
+
+
+18. Gateway
+- 다른 인터넷으로 들어가는 입구
+
+19. 스위치
+- 포트, 포트번호가 있고 맥테이블을 참고한다.
+- 스위치는 포트마다 번호가 존재한다.
+
+20. 라우터
+- 다른 네트워크 (리모트 네트워크)와 연결해주는 장비
+- 라우터는 포트마다 ip가 존재한다. 독립적.
+- 같은 네트워크 대역대로 설정해주지 않으면 밖으로 못 나간다.
+- 192.168.0.3에서 192.168.0.4로 가고 싶다면 일단 게이트웨이 들어간 후, 
+  게이트웨이 IP마지막이 1인 아이피로 할당해서 내보낸다.
+
+
