@@ -13,7 +13,9 @@ MAC 주소에 대해
 
 
 스위치에서 가장 중요한 Learning 기능
-ARP Table 학습 기능이지.
+ARP가 아닌 Switch 무슨 기능이라고 했던 것 같음. 알게되면 추가
+일단 기능에는 4가지가 있음
+- Learning, Forwarding, Filtering, Flooding.
 12		13
       3    4
 
@@ -38,6 +40,14 @@ SRCMAC / DSTMAC / Data
 플러딩 안해도 맥주소를 알 수 있는 방법 -> 모든 맥주소에 데이터 보내기 ㅋㅋㅋ
 
 스위치는 포트마다 맥주소가 등록이 안되는 이유. 고유하니까. 혼선이 생길 수 있으니까!
+
+스위치의 4대 기능
+
+Learning		- Switch로 유입된 Frame의 Source MAC address를 기반으로 MAC address table을 생성하는 기능이다.
+Forwarding	- Switch로 유입된 Frame의 Destination MAC address를 MAC address table에서 검색(Lookup)하여 MAC address table에 존재하는 경우, 해당 MAC address가 연결되어 있는 Port로만 Frame을 전송하는 기능이다.
+Filtering		- Filtering 기능은 두가지가 있는데, 하나는 Frame이 유입된 Port로 다시 Frame을 전송하는 않는 기능이고, 다른 하나는 MAC address table에 Destination MAC address가 존재하는 경우 해당 MAC address가 연결되어 있지 않은 Port로는 Frame을 전송하지 않는 기능이다.
+Flooding		- Switch로 유입된 Frame의 Destination MAC address를 MAC address table에서 검색(Lookup)하여 MAC address table에 존재하지 않는 경우, Frame이 유입된 Port를 제외한 모든 Port로 Frame이 전송하는 기능이다.
+
 
 
 2계층 네트워크 접속 계층은 LLC와 MAC이 있다.
