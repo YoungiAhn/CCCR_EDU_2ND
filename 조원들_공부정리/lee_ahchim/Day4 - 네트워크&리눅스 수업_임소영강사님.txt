@@ -309,10 +309,146 @@ Error reporting
  - Redirection : 서버에서 돌아오는 또다른 출구를 알려줄 때 (특수)
 
 Query
-Echo request and reply - 통신되는지 여부
-Timestamp request and reply 시간 알려주기
-Address mask request and reply 마스크
-Router solicitation and advertisement 라우터가 결국 나라고 답장해주는(특수)
+ - Echo request and reply : 통신되는지 여부(쓰레기 데이터 넣기)
+ - Timestamp request and reply : 시간 알려주기
+ - Address mask request and reply : 마스크 알려주기
+ - Router solicitation and advertisement : 라우터가 결국 나라고 답장해주는(특수)
+
+
+루프백 핑안되면 랜카드에 문제가 있는것
+자가테스트용으로 많이 쓰이기도 합니다!
+
+
+
+패킷트레이서 사용했다 Windows7!
+
+라우터	스위치	허브/리피터	...	선
+엔드포인트	...
+
+콘솔케이블 꽂기 어떻게 비유했냐면
+MP3 안에 음악넣으려면 USB 쓰듯이!
+
+스위치 포트 최소 24개
+여러개 PC 꽂는 목적
+
+L4 Switch
+포트번호까지 볼 수 있어요.
+네이버를 하는데 창을 3개 열었어요
+3개가 다 포트번호가 다르다구
+
+
+로드밸런싱 - 펠 오버?
+세션 정보까지 관리해야 해서 L4 Switch를 사용한다
+로드밸런싱을 위해서
+
+
+L7 Switch
+웹방화벽 (정책)	조건 L7
+	web data 조건.
+방화벽 : 패킷필터링 (ip.port 에 대한 정책)
+ L3
+
+MultiLayer Switch
+
+UTP 케이블
+1,2,3,6번만 사용 그 외엔 예비
+Twisted-Pair TP
+Straight-Through (Direct)
+Cross-Over
+
+포트에 따라 달라지는 전송 위치.
+PC, Router	먼저 데이터 보낼 수 있고, 보내고 받는다. 1236 - Tx, Rx
+Switch, Hub	먼저 데이터 못보내고 받아서 보낼 수 있다. 1236 - Rx, Tx
+
+Router	T -> R	SW
+	R <- T
+	Straight-Through
+
+SW1	R    R	SW2
+	T    T
+	왼쪽 위에서 오른쪽아래
+	왼쪽 밑에서 오른쪽위
+
+그래서 다른 친구들은 스트레이트
+같은 친구들은 크로스오버 꽂는것이구나..
+
+Switch 2950은 안되는데
+Switch 2960부터 되는기능
+크로스오버 케이블과 스트레이트-쓰루 케이블 둘다꽂힘
+왜냐면 안 맞으면 바꿔주는 기능있음.
+
+
+RealTime / Simulation
+	   Auto Capture / Play
+
+
+ARP Table
+
+허브의 플러딩 - 들어온 신호를 알수 있는 방법이 없어서!
+
+
+TTL
+Cisco Router - 255
+윈도우 - 128
+리눅스 - 65? 64인가
+
+
+
+1. ICMP가 상대방의 MAC주소를 모르는 상태
+2. ICMP 패킷이 밖으로 나갈 수가 없어서 ARP 패킷 생성
+   (방송용 주소, 브로드캐스트 주소인 FF:FF:FF:FF:FF:FF 로 보냅니다.
+    타겟 맥주소는 00:00:00:00:00:00)
+   Eth - 데이터빼고는 Header, Tailer
+   ARP - SRC MAC,IP / TAR MAC,IP
+3. 
+
+인바운드 아웃바운드
+보낸사람 받는사람 주소가 바뀌어 있어요
+돌아올 땐 유니캐스트
+
+돌아올 때 스위치에서 맥주소를 보고 ?번 포트에 꽂혀 있구나~
+알고 찾아감.
+
+PC의 ARP table 에 상대방 맥주소 기록
+
+ARP 견해차이
+3계층에서 약간 아래
+cisco : 2계층
+
+스위치와 허브의 차이
+Ethernet을 아느냐 모르느냐 차이입니다
+작동하는 계층이 다릅니다.
+허브는 그래서 플러딩밖에 못합니다.
+1계층을 포함한 2계층인 스위치
+맥주소 포워딩 테이블을 보고 배달을 해준다.
+
+
+맥주소를 모를 때 ICMP도 브로드캐스트로 플러딩하고
+알아서 찾아가게한다~
+스위치는 모르더라도 안 버리고 플러딩! 으로
+모두 연락을 한다.
+
+여러개 PC로 전달을 한다.
+스위치는 플러딩 뿐만 아니라
+Learning Forwarding Filtering Aging도 하는것
+MAC Address
+Switch Table
+
+스위치는 하나도 안버리지만
+라우터는 라우팅 테이블 안에 없으면 다버림
+그러한 에러를 확인할 수 있게, 처리할 수 있게 해주는 것이
+ICMP!
+
+
+오늘의 정리
+1. OSI 7 Layer 모델은 누가 왜 만들었나?
+   각 Layer 이름, 기능, 프로토콜, 장비, 데이터단위 (PDU)
+2. Address 주소는 Physical과 Logical로 나누어진다.
+   각각에 대하여 설명하시오.
+
+3. 네트워크장비 허브와 스위치를 비교하시오. (공통점, 차이점)
+
+자습시간에 정리해서 적어보자
 
 
 HTTP -> HTTPS (기밀성 보완)
