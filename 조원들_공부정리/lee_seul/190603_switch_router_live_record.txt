@@ -41,5 +41,120 @@ TCP  -	정확한 방식
 VPN(Virtual Private Network)
 - 예전에는 비싼 private network 사용 했었으나 이제는 VPN을 통해서 public network 로도 보안상 문제 없이 사용할 수 있다.
 - 가짜로 사설망처럼 사용해! 실제로는 공인망을 사용함! -> 실제로는 public network를 사용하지만 private network 사용할 수 있게 해줌.
+- public network 는 보안상 불안하니깐 encoding & ternaling를 이용하는 것. 
 
+
+NAT(network address translation)
+- IP routing table 보고 router 에서 deliver
+- IP routing table에는 public IP만 있음.
+- private IP --> public IP
+
+
+
+OSI 7 layer
+- 세계표준기구 ISO established in 1977
+- 전세계사람들이 통신하기 위해서
+
+4bit - 16진수
+4,4bit= 8byte
+(oo):(oo):(oo):(oo):(oo):(oo)	
+밴더= OUI     | product no.
+
+IPv6 - 128bit
+
+
+MAC adr 길이 표현방식
+
+IPv4 adr.
+- 8bit.8bit.8bit.8bit
+- 0.0.0.0 ~ 255.255.255.255
+- length : 32 bit
+- class : A      B	C	D	E 
+  	 0~127/128~191/192~223/224~239/240~255
+          128   64      32	16	16
+
+
+Network ID: 똑같은 부분 
+Host ID: 다른 부분 unique!
+
+A class - network ID 적음, 그러나 host ID 많음.
+
+	8	8	8	8	HID no.	Subnet mask	prefix(/NID bit)
+A class	NID	HID	HID	HID	2^24	255.0.0.0	/8 
+B class	NID	NID	HID	HID	2^16	255.255.0.0	/16
+C class	NID	NID	NID	HID	2^8	255.255.255.0	/24
+								내려갈수록 NID 점점 길어짐
+
+NID와 HID나누는 기준 Subnet mask 
+subnetting : network를 나누기, 나누어진 network를 subnet  <--> summary(summarization)
+
+
+	IP allocated	
+(router)--------(router)
+:router와 router 사이에 IP 할당, public IP 할당
+
+private IP 쓰는 이유는 부족한 공인 IP를 사용할 수 없음
+
+맨 처음 0  : 대표, 이 주소를 사용한다.
+마지막	1 : broadcast 
+
+
+
+ex)
+0.0.0.0/8
+--------|	|	|	|/8
+========|=======|	|	|/16
+
+router 들이 IP routing table 참고
+subentting 을 많이 하면 router끼리 주고 받아야할 데이터가 많아져서 summarizaiotn aggregation해줌.
+
+
+
+data 전송시는 7->1로 내려가아아아요.
+- sending data : encapsulation : [data] + [header protocol] 내려보내기 
+- received data: de(en)capsulation : [data|header] 올려보내기 (header에 있는 정보를 보고 상위 protocol로 보냅니당)
+  data 수/전송시 데이터 손실이나 에러를 막기 위해서 쪼갬!
+::data fragmentation(단편화) 
+--length 제한
+  tailer[ | | | | ]header
+         ethernet 환경
+  MTU(Maximum transmission unit) : 1500byte
+
+
+	name		function				protocol			device					PDU(protocol data unit)
+L7	Application	user-applicaition interface		Http/SMTP/POP3/FTP
+L6	Presentaion	data encode decode/ file											data&message		
+L5	Session							
+L4	Trans'port'	전송방식에 따라 신속 or 빨리		TCP(accurate)/UDP(instance)						TCP segment, UDP datagram
+L3	Network		주소방식 -> 길찾기, 라우팅		IP (ICMP, ARP, RARP)		Router(routing protocol)=Gateway	packet
+L2	Datalink						Ethernet			Switch					frame
+L1	Physical	signal <--> data							hub,(repeater)				bit
+
+
+
+												*아래 계층의 장비의 기능을 상위계층은 포함한다
+보안의 3 요소
+-기밀성 http -> https
+-무결성
+-가용성
+			port no.
+http - ===> https		
+SMTP - sending mail
+PDP3 - receiving mail
+IMAP, DNS , SSH
+
+ICMP: error 있는지 판별
+ARP -- IP에서 MAC 알아오는 것
+RARP -- MAC에서 IP 알아오는 것
+Routing protocol - 경로 동기화 **
+
+Ethernet --- LLC : Logical link 지금은 IP를 쓰지만 예전에는 서로 다른 protocol을 썼기 때문에 상위 protocol 정보를 알아보는 것
+         --- MAC : media access protocol 
+
+
+지금의 hub는 repeater 의 기능을 갖고 있다.
+
+switch은 배워서 만들지만 router 들은 배울 수 없어서 엔지니어들이 해줘야한다.
+스위치는 모르면 브로드캐스트해서 배우고
+라우터는 모르면 패킷을 버림
 
