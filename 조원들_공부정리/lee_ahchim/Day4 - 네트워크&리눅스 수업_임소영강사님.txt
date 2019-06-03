@@ -171,6 +171,149 @@ L1 Physical		논리적 Data -> 물리적 비트 변환					허브(+리피터), �
 
 밥먹고 똑똑해진 스위치를 알아봅시다
 
+우분투 소프트웨어
+Oracle VM VirtualBox
+돌아가는 데도 메모리나 하드디스크를 쓰기 때문에
+우분투를 사용하고 남은 메모리랑 하드디스크 써야함
+8기가에서 우분투 3기가 -> 5기가
+윈도우 2기가 -> 3기가
+여기서 더 돌린다면? 안된다~
+남겨둬야된다
+
+가상머신을 하고 싶다, 윈도우
+
+
+ipconfig /all
+ipconfig /...
+
+
+IP에 해당하는 맥주소를 알아오는 프로토콜
+ARP Cache
+
+arp -a
+arp /?
+
+arp -d
+권한없어서 못함
+관리자 권한으로 실행!
+
+arp -d
+arp -a
+(찾을 수 없음)
+ping 10.0.2.2
+arp -a (게이트웨이만 뜸)
+
+캐시 즉 램 메모리에 저장됨.
+껐다 키거나 일정 시간이 지나면 지워짐!
+
+쉬었다가 라우팅 테이블을 봅시당.
+
+
+DNS Cache
+ARP Cache
+
+인터넷 주소	물리적 주소
+10.0.2.255	ff-ff-ff-ff-ff-ff
+239.255.255.250	~~~~~~~~~~~~~~~~~
+정적인 주소 2개
+
+DNS Domain Name Service 라는 테스트를 해본다.
+
+route print
+netstat -nr  			(r - route)
+아래껀 리눅스도 되는 명령어인것이 차이점~
+
+IPv6
+::1
+0:0:...:1
+
+네트워크 카드는 물리적인 것, 가상인 것 2개
+멀티캐스트, 방송용...
+
+default route	0.0.0.0 0.0.0.0 10.0.2.2
+네트워크 아이디 + 본인 IP + 브로드캐스트 주소
+
+tracert traceroute 이거 네트워크 엔지니어들이
+중간 라우터 어떤게 문제있나 본다고 했는데 진짜 맞닼ㅋㅋ
+
+무한루프를 방지하고 TTL 한번 보는거지
+
+
+ping gateway와
+ping 8.8.8.8의 TTL 확인
+
+root@user-Aspire-E5-576:~# ping 210.117.126.1
+PING 210.117.126.1 (210.117.126.1) 56(84) bytes of data.
+64 bytes from 210.117.126.1: icmp_seq=1 ttl=64 time=1.28 ms
+64 bytes from 210.117.126.1: icmp_seq=2 ttl=64 time=1.33 ms
+64 bytes from 210.117.126.1: icmp_seq=3 ttl=64 time=1.72 ms
+--- 210.117.126.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 1.280/1.446/1.721/0.200 ms
+
+root@user-Aspire-E5-576:~# ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=54 time=32.2 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=54 time=32.2 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=54 time=32.2 ms
+--- 8.8.8.8 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 32.216/32.231/32.245/0.207 ms
+
+10개정도 거친다이거에요.
+
+root@user-Aspire-E5-576:~# tracepath 210.117.126.1
+ 1?: [LOCALHOST]                      pmtu 1500
+ 1:  _gateway                                              1.372ms reached
+ 1:  _gateway                                              1.641ms reached
+     Resume: pmtu 1500 hops 1 back 1 
+root@user-Aspire-E5-576:~# tracepath 8.8.8.8
+ 1?: [LOCALHOST]                      pmtu 1500
+ 1:  _gateway                                              1.330ms 
+ 1:  _gateway                                              1.411ms 
+ 2:  1.235.7.97                                            1.505ms 
+ 3:  100.70.196.233                                        0.732ms 
+ 4:  10.63.252.38                                          1.103ms 
+ 5:  10.222.7.138                                          3.418ms 
+ 6:  175.124.54.85                                         2.521ms 
+ 7:  10.222.6.23                                           1.333ms asymm  6 
+ 8:  no reply
+ 9:  no reply
+10:  no reply
+...
+
+
+
+	      L7    L4    L3   L2	DST : 해당 MAC
+www.daum.net [DNS] [UDP] [IP] [ETH]	SRC : MAC 자신
+		DST 53	 DST 10.0.2.3
+		SRC 랜덤 SRC 10.0.2.15
+
+HDD <- 프로그램
+	실행
+
+RAM	작동중 (프로세스)
+	데몬
+포트 번호!
+
+nbtstat -n으로 
+
+
+
+ICMP
+Error reporting
+ - Destination unreachable
+ - Sourch quench
+ - Time exceeeded
+ - Parameter problems
+ - Redirection : 서버에서 돌아오는 또다른 출구를 알려줄 때 (특수)
+
+Query
+Echo request and reply - 통신되는지 여부
+Timestamp request and reply 시간 알려주기
+Address mask request and reply 마스크
+Router solicitation and advertisement 라우터가 결국 나라고 답장해주는(특수)
+
 
 HTTP -> HTTPS (기밀성 보완)
 SMTP	Simple Mail Transfer Protocol	전송
@@ -189,6 +332,11 @@ IP는 비신뢰성이다! Header 붙여 보내는게 자꾸 사라져.
 
 클라이언트 - 서비스를 요청
 서버 - 서비스를 제공
+
+
+
+TCP UDP 관련 후반부
+
 
 
 
