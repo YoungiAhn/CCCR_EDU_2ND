@@ -450,6 +450,56 @@ ICMP!
 
 자습시간에 정리해서 적어보자
 
+1.
+OSI 7 Layer 모델을 만든 곳
+ - 국제표준화기구 ISO에서 만듬
+OSI 7 Layer 모델을 만든 이유
+ - 네트워크 통신의 데이터 생성과 전송 처리 과정의 표준화, 규격화를 통해
+   네트워크 장비 규격의 호환성 추구, 각 계층별 독립성으로 장애 처리에 수월하기 위함
+	이름			기능								Protocol		장비			데이터단위(PDU)
+L7	Application(응용)	사용자에게 응용프로그램을 통해서 네트워크 통신,			HTTP, FTP, SSH,		Computer,		데이터/메시지
+				즉 데이터 송수신이 가능하도록 서비스해주는 계층.		SMTP, POP3, IMAP...	각종 End-Point		(L7~L5)
+L6	Presentation(표현)	데이터의 인코드/디코드, 압축/해지를 통해						기기들(L7~L5)
+				사용자에게 육안으로 보여지도록 데이터를 표현해주는 계층.
+				여기서 데이터가 텍스트인지, 이미지인지 등도 판별 가능.
+L5	Session			운영체제(OS)간 논리적인 연결 담당.
+				논리적인 연결인 애플리케이션 간 세션을
+				구축/관리하고 종료하며 연결을 유지하는 역할을 함.
+L4	Transport(전송)		데이터의 논리적인 연결을 담당하며				TCP / UDP                                       Segment (TCP),
+				데이터의 전송 방식을 결정함.                                                                                    Datagram (UDP)
+				즉, 서비스 포트 번호 처리로											
+				데이터가 어떻게 쓰일지 미리 분류하는 계층.
+L3	Network			로컬 네트워크에서 리모트 네트워크로				IP, ARP, ICMP,...	Router			Packet
+				데이터 전송을 담당하는 계층.
+				이를 위해 IP 계층의 데이터를 전송하는 프로토콜 및
+				IP 주소의 경로 지정 프로토콜이나
+				MAC주소를 IP 주소로 바꾸어주는 프로토콜 등도 L3에 해당.
+L2	Data-Link		로컬 네트워크 내에서 데이터 전송을 담당하는 계층.		Ethernet, ...		Switch			Frame
+				또한 Encapsulation 시 물리 계층으로 캡슐화되기 전
+				흐름 제어, 에러 검출 등 마지막으로 신뢰성 보장.
+L1	Physical(물리)		논리적인 데이터를 물리적인 전기 신호(bit)로 변환하여(Encap시)				Hub, Repeater,		Bit, Stream
+				데이터를 송수신하는 계층.								UTP Cable, ...
+				이 때 흐르는 데이터가 무슨 데이터인지는 크게 상관하지 않음.
+
+
+2.
+Address 주소의 종류
+Physical Address - 변경이 불가능하고 물리적인 주소, 해당 장비의 고유의 주소. 대표적으로 장비의 고유주소인 MAC Address가 있음.
+Logical Address - 변경이 가능하고 논리적인 주소. 사용자가 지정할 수 있는 주소. 대표적으로 IP Address가 있음.
+
+3. 
+네트워크 멀티포트 장비(?)의 공통점, 차이점
+허브, 스위치 공통점 - 다수의 End-Point 기기(단말기)를 연결해서 LAN 통신 가능
+허브 - L1 장비, Ethernet 프로토콜 사용 불가능, 따라서 Switch에서 가능한 기능 중 하나인 Flooding 기능밖에 사용 못함
+스위치 - L1+L2 장비, Ethernet 프로토콜 사용 가능, Switch는 허브와 달리 Learning, Forwarding, Flooding, Filtering, Aging의 기능이 있음.
+						  Flooding을 통해 목적지 MAC 주소를 Learning하고 이후 유니캐스트로 목적지 맥 주소로 Forwarding하고 
+						  각각의 프레임을 Filtering해주는 기능을 수행함.
+						  학습된 맥주소는 기간 만료(Aging) 기능으로 일정 시간 이후에 캐시가 비워져서 사라짐.
+
+http://210.117.127.49:8080 <- 강사님 PC
+수업 내용 다운로드 가능
+
+
 
 HTTP -> HTTPS (기밀성 보완)
 SMTP	Simple Mail Transfer Protocol	전송
