@@ -246,4 +246,90 @@ windows는 컴퓨터 이름을 씀.
 
 nbtstat.exe -n
 
-책 23,24페이지
+책 23,24페이지 29-31페이지
+
+127.0.0.1(로컬 호스트 주소) 에서 핑 보냈을 때 응답 없으면 인터넷 문제 있을 수 있다.
+
+packet tracer : network device 가져와서 그림을 그리는 것.
+
+
+packet tracer image
+원기둥 박스
+라우터 스위치 repeater hub ? ?
+PC
+
+   console cable
+PC -------------- router
+
+
+Router = LAN card 하나당 Interface
+L3 switch = L3 계층 까지
+
+
+windows web browser에서 네이버창 3번 열면 port 세개가 지정됨
+
+
+LB(Load Balancer) 
+- 서버 과부화를 막기위해서 분산화
+- 를 하려면 Session 정보를 같이 봐야함.
+- L4 switch에서...
+
+
+방화벽 두개 사용함 
+- 서버과부화 걸려서 막히는 것 방지
+- 하나 막히면 나머지 하나를 쓰게끔.
+
+
+웹방화벽 (정책)에 대한 조건을 (L7 : 7계층까지 정책을 씀) , service 별로 나눠서.
+                            web data 조건
+일반 방화벽 : 패킷 필터링( ip, port 정책)
+-> 보통 방화벽은 3계층
+
+PC : L7 device
+
+Cisco device : 2000 series; L2, 3000 series ;L3
+
+
+UTP cabel 1.2.3.6 cable 사용
+orange start
+brown end
+
+
+one side orange start      ---> crossover
+another side green start 
+
+
+receiving and sending is differnt from port.
+
+	1236
+          보내 받고
+PC router Tx Rx
+
+           받  보내고
+	   12  36
+Switch Hub Rx Tx
+- bridge function 
+
+
+	T----------------R
+Router   		    S/w    ==> straight-through cable 
+	R----------------T
+
+
+	R--------========R
+S/W1	   		    S/W2    ==> cross over cable 
+	T=========--------T
+
+
+	R-------=========R
+S/W2	   		    hub    ==> cross over cable 
+	T=======---------T
+
+
+	R----------------T
+hub	   		    pc    ==> straight-through cable
+	T----------------R
+
+
+switch 2계층 아래 장비 RT(받고 보내고)
+router 3계층 위에 장비 TR(보내고 받고)
