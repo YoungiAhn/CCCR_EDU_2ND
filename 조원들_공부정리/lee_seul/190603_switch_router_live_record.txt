@@ -41,5 +41,68 @@ TCP  -	정확한 방식
 VPN(Virtual Private Network)
 - 예전에는 비싼 private network 사용 했었으나 이제는 VPN을 통해서 public network 로도 보안상 문제 없이 사용할 수 있다.
 - 가짜로 사설망처럼 사용해! 실제로는 공인망을 사용함! -> 실제로는 public network를 사용하지만 private network 사용할 수 있게 해줌.
+- public network 는 보안상 불안하니깐 encoding & ternaling를 이용하는 것. 
 
 
+NAT(network address translation)
+- IP routing table 보고 router 에서 deliver
+- IP routing table에는 public IP만 있음.
+- private IP --> public IP
+
+
+
+OSI 7 layer
+- 세계표준기구 ISO established in 1977
+- 전세계사람들이 통신하기 위해서
+
+4bit - 16진수
+4,4bit= 8byte
+(oo):(oo):(oo):(oo):(oo):(oo)	
+밴더= OUI     | product no.
+
+IPv6 - 128bit
+
+
+MAC adr 길이 표현방식
+
+IPv4 adr.
+- 8bit.8bit.8bit.8bit
+- 0.0.0.0 ~ 255.255.255.255
+- length : 32 bit
+- class : A      B	C	D	E 
+  	 0~127/128~191/192~223/224~239/240~255
+          128   64      32	16	16
+
+
+Network ID: 똑같은 부분 
+Host ID: 다른 부분 unique!
+
+A class - network ID 적음, 그러나 host ID 많음.
+
+	8	8	8	8	HID no.	Subnet mask	prefix(/NID bit)
+A class	NID	HID	HID	HID	2^24	255.0.0.0	/8 
+B class	NID	NID	HID	HID	2^16	255.255.0.0	/16
+C class	NID	NID	NID	HID	2^8	255.255.255.0	/24
+								내려갈수록 NID 점점 길어짐
+
+NID와 HID나누는 기준 Subnet mask 
+subnetting : network를 나누기, 나누어진 network를 subnet  <--> summary(summarization)
+
+
+	IP allocated	
+(router)--------(router)
+:router와 router 사이에 IP 할당, public IP 할당
+
+private IP 쓰는 이유는 부족한 공인 IP를 사용할 수 없음
+
+맨 처음 0  : 대표, 이 주소를 사용한다.
+마지막	1 : broadcast 
+
+
+
+ex)
+0.0.0.0/8
+--------|	|	|	|/8
+========|=======|	|	|/16
+
+router 들이 IP routing table 참고 
