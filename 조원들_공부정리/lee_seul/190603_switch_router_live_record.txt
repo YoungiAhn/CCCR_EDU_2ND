@@ -4,7 +4,42 @@ linux_tools folder\virtual box
 
 
 USB
--exFAT  --- 둘 다 지원
+-exFAT  --- 둘 다 지원 그런데 우분투에서 인식 안해애애애..
 -NTFS
+
+
+To do the internet, We need devices 
+Interface		address				when allocated		use			aim
+- LAN card (NIC)	MAC address(physical address) 	when manufactured	Ethernet protocl	
+- (= Ethernet card)	IP address(logical address) 	when 			IP protocol		to use internet
+
+MAC adr(physical) <-----> IP adr(logical)
+	ARP commuicated
+
+IP <-> DNS : allocate domain name
+
+header	- service
+	- how to transfer : instance(UDP), accurate(TCP):(server<->client)
+				최근 많아짐 / 예전에는 거의 TCP 사용
+			voice & movie : UDP use / 
+			차에서 구급차가 빨리가는 것처럼, 다른 차가 양보해서 빨리갈 수 있게 해주는 것처럼 빨리가게 함.그런 설정을 해줌. 
+			이런 서비스를 QOS(Quality of Service)
+	- address 방식 : IP , 주소를 보고 길 찾아서 가는 것 -> router(routing) 
+	- switching - 내 영역을 지나가는 것
+		    - LAN : Ethernet
+		    - WAN : IP
+	
+
+
+<difference between UDP and TCP>
+
+UDP  -	instance, 동영상이나 보이스를 전달하는 방식이 많아지면서 TCP보다는 UDP를 사용하게 됨
+	QOS(Quality of Service)를 사용
+TCP  -	정확한 방식
+
+
+VPN(Virtual Private Network)
+- 예전에는 비싼 private network 사용 했었으나 이제는 VPN을 통해서 public network 로도 보안상 문제 없이 사용할 수 있다.
+- 가짜로 사설망처럼 사용해! 실제로는 공인망을 사용함! -> 실제로는 public network를 사용하지만 private network 사용할 수 있게 해줌.
 
 
