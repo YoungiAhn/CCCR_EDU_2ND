@@ -158,3 +158,36 @@ switch은 배워서 만들지만 router 들은 배울 수 없어서 엔지니어
 스위치는 모르면 브로드캐스트해서 배우고
 라우터는 모르면 패킷을 버림
 
+
+
+Oracle virtual box
+Windows : hyper V
+vmware workstation(charged)
+
+
+virtual world -----> file
+physical disc memory 남겨둬야한다ㅏㅏㅏㅏㅏ
+
+
+Linux 에서는 swap이라는 것이 있음 - 사용 메모리와 대기 메모리, 대기 메모리 가상메모리를 swap이라고 둠
+				- 그러나 windows에는 따로 안 만들어두고 그 때 그 때 사용한다, 그래서 사용공간이 항상 존재해야함.
+
+
+
+Windows : ipconfig
+Linux : ifconfig - interface
+
+
+network adr. n.n.n.0
+
+DHCP Dynamic host configuration protocol
+
+ARP - IP를 통해 MAC 주소 알아옴
+    - ARP 
+
+
+LAN에서는 MAC 주소를 알아야 하지만
+WAN에서는 IP 주소로 통신하기 때문에 ARP사용 
+
+
+command : ARP -a
