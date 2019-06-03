@@ -4,7 +4,7 @@ linux_tools folder\virtual box
 
 
 USB
--exFAT  --- 둘 다 지원 그런데 우분투에서 인식 안해애애애..
+-exFAT  --- 둘 다 지원 그런데 설치하려니깐 우분투에서 인식 안해애애애..
 -NTFS
 
 
@@ -333,3 +333,69 @@ hub	   		    pc    ==> straight-through cable
 
 switch 2계층 아래 장비 RT(받고 보내고)
 router 3계층 위에 장비 TR(보내고 받고)
+
+
+교재 33page
+
+
+라우터는 뭘 해야하는지 스위치는 뭘 해야하는지 항상 목적성을 생각해보자.
+
+
+
+스위치와 허브
+- 공통점 : 여러개의 PC에 연결되서 전달된다.
+- 차이점 
+  - hub : protocol 모를 때 flooding 만 함.
+  - switch : 맥주소를 보고 전달하고 learning fowarding filtering flooding aging 함
+
+
+스위치는 모르면 flooding
+라우터는 모르면 packet 버리고 에러정보에 대해서 ICMP가 알려줌.
+
+
+
+
+**************************************************************************
+
+웹방화벽 (정책)  조건 L7
+	web data 조건.
+방화벽 : 패킷필터링 (ip.port 정책)
+ L3
+
+
+
+**************************************************************************
+
+**************강사님이 정리해주는 오늘의 정리***********************
+1. OSI 7 layer 모델은 누가 왜 만들었나?
+   각 Layer 이름, 기능, 프로토콜, 장비, 데이터단위(PDU)
+2. Address는 Physical과 Logical로 나누어진다.
+   각각에 대하여 설명하시오
+3. 네트워크장비 허브와 스위치를 비교하시오.(공통점, 차이점)
+
+
+1. OSI 7 layer 모델은 누가 왜 만들었나?
+   각 Layer 이름, 기능, 프로토콜, 장비, 데이터단위(PDU)
+
+	ISO에서 1977년에 전세계 사람들이 통신을 할 수 있게 하기 위해서 만들어졌다.
+
+	OSI 7 layer	function								adrress		protocol		device		data unit(PDU) 
+7	Application	user에게 application interface 제공					 		http/https,SMPT/POP3			data					
+6	Presentaion	encode/decode, data zip, unzip해서 사용자에게 육안으로 데이터를 보여줌								&
+5	Session		OS간에 연결을 Session이라고 하는데 Session 생성 관리 종료해줌									message
+4	Transport	전송방식에 따라 신속함이냐 정확함이냐 판단해서 전송방식 결정			(port?)		TCP/UDP					segment/datagram
+3	Network		WAN 사이에서 데이터 전송을 담당						IP		IP			router		packet
+2	Datalink	LAN 내에서 데이터 전송을 담당						MAC		Ethernet		switch		frame
+1	Physical	전기적이나 빛의 신호(signal)을 data로 변환									hub		bit
+
+
+2. Address는 Physical과 Logical로 나누어진다. 각각에 대하여 설명하시오
+				address			when		use			aim
+	logical Address : 	IP 			maufacutred	IP protocol		to communicate LAN
+	Physical Address : 	MAC 			DNS allocate	Ethernet protocol	to use internet(WAN)
+
+3. 네트워크장비 허브와 스위치를 비교하시오.(공통점, 차이점)
+	공통점 - 둘 다 여러개의 PC에 전달할 수 있다.
+	차이점 - Hub : address 모르면 flooding 만 함.
+		Switch : ARP table 참조해서 MAC 주소를 알면 deliver 
+			 MAC address 모르면 flooding을 해주고, 그 후 주소 정보를 입수하면 learning fowarding filtering flooding aging을 통해 학습을 한다.
