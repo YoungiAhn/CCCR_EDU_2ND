@@ -183,7 +183,7 @@ network adr. n.n.n.0
 DHCP Dynamic host configuration protocol
 
 ARP - IP를 통해 MAC 주소 알아옴
-    - ARP 
+    - ARP 메모리에 저장되어 시스템 종료하면 사라지게 됨.
 
 
 LAN에서는 MAC 주소를 알아야 하지만
@@ -191,3 +191,59 @@ WAN에서는 IP 주소로 통신하기 때문에 ARP사용
 
 
 command : ARP -a
+
+
+
+인터넷 되는 지 확인
+1. 내 아이피 확인
+2. 게이트웨이 핑 확인
+
+
+arp -a
+route print (경로 출력해)
+netstat -nr (-r: route abbrevation)
+ping IP adr (test)
+
+127.0.0.1 local host - 큰 ip network를 못씀..ㅠㅠ
+::1/128 128bit에서 끝에 1
+
+default route 
+- 인터넷을 연결하는 모든 시스템에는 다 default route에 있어야 해 
+  : 내가 알고 있는 곳 이외에는 다 Gateway로 보내 -> default route : 내가 알고 있는 것 나머지.
+
+
+ping
+tracert => trace router의 약자
+
+router list 
+time to live : looping 되서 헤맬 수 있으니깐 packet -1 씩 줄여서 나중에 버림.
+-> TTL
+packet switching
+
+
+linux : TTL 64 , router list 10개면 , 응답할 때 TTL 54개
+
+nslookup www.naver.com 
+nslookup : DNS 확인할 때
+
+		L7    L4             L3        L2
+www.naver.com | DNS | UDP      |     IP    | Ethernet |
+	   dst        53        10.0.2.3      MAC
+           src        random    10.0.2.15     My MAC adr.
+
+어떤 프로그램이랑 연결시켜줄 지 알려주는 것이 바로 포트 번호
+
+HDD : program
+RAM : working program: process
+      service demon
+
+-a : all
+
+
+windows system으로 대화를 하는데 
+windows는 컴퓨터 이름을 씀.
+-> NETBIOS =>  device : MS system 
+
+nbtstat.exe -n
+
+책 23,24페이지
