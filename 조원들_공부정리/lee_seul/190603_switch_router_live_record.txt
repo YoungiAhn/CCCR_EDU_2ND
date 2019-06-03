@@ -1,0 +1,10 @@
+임소영 강사님 soyoung.lim2009@gmail.com
+
+linux_tools folder\virtual box
+
+
+USB
+-exFAT  --- 둘 다 지원
+-NTFS
+
+
