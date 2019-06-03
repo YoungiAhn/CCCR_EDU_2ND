@@ -105,4 +105,56 @@ ex)
 --------|	|	|	|/8
 ========|=======|	|	|/16
 
-router 들이 IP routing table 참고 
+router 들이 IP routing table 참고
+subentting 을 많이 하면 router끼리 주고 받아야할 데이터가 많아져서 summarizaiotn aggregation해줌.
+
+
+
+data 전송시는 7->1로 내려가아아아요.
+- sending data : encapsulation : [data] + [header protocol] 내려보내기 
+- received data: de(en)capsulation : [data|header] 올려보내기 (header에 있는 정보를 보고 상위 protocol로 보냅니당)
+  data 수/전송시 데이터 손실이나 에러를 막기 위해서 쪼갬!
+::data fragmentation(단편화) 
+--length 제한
+  tailer[ | | | | ]header
+         ethernet 환경
+  MTU(Maximum transmission unit) : 1500byte
+
+
+	name		function				protocol			device					PDU(protocol data unit)
+L7	Application	user-applicaition interface		Http/SMTP/POP3/FTP
+L6	Presentaion	data encode decode/ file											data&message		
+L5	Session							
+L4	Trans'port'	전송방식에 따라 신속 or 빨리		TCP(accurate)/UDP(instance)						TCP segment, UDP datagram
+L3	Network		주소방식 -> 길찾기, 라우팅		IP (ICMP, ARP, RARP)		Router(routing protocol)=Gateway	packet
+L2	Datalink						Ethernet			Switch					frame
+L1	Physical	signal <--> data							hub,(repeater)				bit
+
+
+
+												*아래 계층의 장비의 기능을 상위계층은 포함한다
+보안의 3 요소
+-기밀성 http -> https
+-무결성
+-가용성
+			port no.
+http - ===> https		
+SMTP - sending mail
+PDP3 - receiving mail
+IMAP, DNS , SSH
+
+ICMP: error 있는지 판별
+ARP -- IP에서 MAC 알아오는 것
+RARP -- MAC에서 IP 알아오는 것
+Routing protocol - 경로 동기화 **
+
+Ethernet --- LLC : Logical link 지금은 IP를 쓰지만 예전에는 서로 다른 protocol을 썼기 때문에 상위 protocol 정보를 알아보는 것
+         --- MAC : media access protocol 
+
+
+지금의 hub는 repeater 의 기능을 갖고 있다.
+
+switch은 배워서 만들지만 router 들은 배울 수 없어서 엔지니어들이 해줘야한다.
+스위치는 모르면 브로드캐스트해서 배우고
+라우터는 모르면 패킷을 버림
+
