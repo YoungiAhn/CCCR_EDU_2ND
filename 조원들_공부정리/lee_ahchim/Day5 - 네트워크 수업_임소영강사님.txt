@@ -1,0 +1,105 @@
+1. OSI 7 Layer - protocol, device
+2. subnetting
+3. 예약된 IP
+
+
+사설 IPv4 주소 공간
+RFC1918 이름	IP 주소 범위			호스트 ID 크기
+24비트 블록	10.0.0.0 – 10.255.255.255	24 비트
+20비트 블록	172.16.0.0 – 172.31.255.255	20 비트
+16비트 블록	192.168.0.0 – 192.168.255.255	16 비트
+
+아이피 할당할 수 있는거 없는거 구분?
+사설 IP 제외하고는 할당불가능이라고 생각함.
+
+CIDR address block		설명
+0.0.0.0/8			Current network (only valid as source address)
+10.0.0.0/8			Private network (A Class)
+127.0.0.0/8			Loopback
+169.254.0.0/16			Link-Local
+172.16.0.0/12			Private network (B Class)
+192.0.0.0/24			Reserved (IANA)
+192.0.2.0/24			TEST-NET-1, Documentation and example code
+192.88.99.0/24			IPv6 to IPv4 relay
+192.168.0.0/16			Private network (C class)
+198.18.0.0/15			Network benchmark tests
+198.51.100.0/24			TEST-NET-2, Documentation and examples
+203.0.113.0/24			TEST-NET-3, Documentation and examples
+224.0.0.0/4			Multicasts (former Class D network)
+240.0.0.0/4			Reserved (former Class E network)
+255.255.255.255			Broadcast (Limited)
+
+
+http://blog.naver.com/PostView.nhn?blogId=p_rain&logNo=220878796660
+예약된 IP 주소
+
+
+
+		TCP				UDP
+
+http		80		domain/dns	53
+https/ssl	443		bootps		67 (DHCP Server)
+telnet		23		bootpc		68 (DHCP Client)
+ssh		22		tftp		69
+ftp		21		snmp		161
+ftp-data	20		ntp		123
+smtp		25		syslog		514
+POP3		110
+IMAP		143
+
+
+
+https://www.iana.org/
+
+
+사설 IP 주소
+
+우리나라는 아시아라 APNIC 에서 관리
+
+D 클래스 - 멀티캐스트 용도 (224.~~~)
+
+
+
+
+7 Layer는 호환성
+인캡디캡
+
+
+
+L7 프로그램을 사용하기 위한 클라이언트와 서버 부분 계층 일컬음
+
+클라이언트와 서버 어제 적은 대로.
+서버가 클라이언트의 요청을 처리하기 위해 항상 대기 상태로 준비하는 것 : Listening
+클라이언트가 요청하면 즉시 처리해야하고 동시에 여러 클라이언트가 요청해도 안정 처리 해야함.
+
+
+서버가 제공하는 서비스
+FTP : 파일 전송을 위한 가장 기본적인 프로토콜.
+      텔넷처럼 기밀성이 위반되기 때문에 SCP, SSH 기반으로 데이터 통신하거나 VPN으로 가거나 하는게 좋다.
+Telnet : SSL 기밀성 X 버전, 원격접속
+SMTP : 얘도 기밀성 X, 메일 전송 서비스
+POP3 : 메일 수신 서비스. 메일이 사서함에만 남고, 서버에 메일이 남아있진 않음. (실제 편지받는느낌)
+IMAP : POP3 + 웹상에 메일이 남아 있음
+회사 - POP3, IMAP - 네이버, 다음
+메일서비스 3개는 기밀성 위배됨, 암호화가 안됨!
+그래서 SSL 상에서 올리는 것. 혹은 VPN
+SSL - 넷스케이프 상에서 처음 만들고 배포함. (SSL)
+      SSL -> TLS 1.x로 진화 (TLS -> 표준화)
+웹을 암호화한다 -> SSL, TLS, HTTPs
+
+
+
+DNS : 도메인 -> IP, IP -> 도메인 가능 (정방향, 역방향)
+TFTP : 기존 FTP는 TCP 통신, UDP 버전 FTP. 예전에 많이 썼다. TCP 여건이 안될 때 쓴듯
+	정확한 전송이 안 되어서 에러가 많았음. 예전엔 이거만으로 통신을 많이 했다고 한다.
+
+
+
+'가상화' 에 대한 기사 참고!
+
+
+
+
+
+
+
