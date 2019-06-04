@@ -1,0 +1,87 @@
+190604
+Quiz : 20 개 - keyword 위주 정
+
+Quiz list
+1. OSI 7 layer - protocol, device
+   국제표준기구 ISO
+   보안성
+
+   데이터를 보낼 때는 계층이 내려가고 받을 때는 올라감
+   ?가 역할을 함? 4계층에서.
+				function
+   L7 - Application layer 	
+   L6 - Presentaion layer	Data를 어떻게 응답해서 처리해주느냐(Zip, Encoding)
+   L5 - Session Layer		
+   -------> L5~L7 : Service protocol 35page in bookr		
+   L4 - Transport Layer		전송방식에 따라 프로토콜 결정(정확-TCP,신속-UDP)
+   L3 - Network Layer		어떤 주소를 찾아가는 것. 길 찾는 것-routing, ICMP, IGMP, ARP, RARP
+   L2 - Datalink Layer		MAC adr. LLC(상위 프로토콜 찾아주는 것-예전에는 IP 이외의 프로토콜 존재했었음,
+                                             패킷트레이서 에서 볼 수 있당)	
+   L1 - Physical Layer		transfer logical data to electrical signal(1 and 0)
+   Client : Request service.
+   Server : Client request에 응답, 처리
+
+   device L1 hub - flooding 
+          L2 switch(L1 + L2) - Ethernet protocol, MAC adr. , switching table(MAC adr. table)
+                             - learning fowarding filtering flooding(모르면) aging(시간 지나면 cash) 
+          L3 router, L3 switch ( including L1,L2,L3 function)
+             router - IP 로 된 IP table.
+                    - learning이 불가해서 engineer 가 직접 설정
+                    - 모르는 주소면 버림
+                    - static 하게 IP allocating (engineer role)
+             L3 switch - 태생은 L2인데 똑똑해져서 IP 도 알아들음
+          L4 L4 switch (L1 ~ L4) 
+                       - IP, port 까지 인식을 함.
+		       - LB를 붙이기 위한 목적으로 많이 사용.
+		       - (이해를 위한 특수 예시)server 2개 사용할 때 IP와 port no. 로 구분.(detail quest.)
+                       ~ network 장비에 앞뒤로 L4 를 붙임
+          L6 L6 switch - rare. encoding 시 사용
+	  L7 L7 switch - web에 대해서만, 보안정책을 사용하고 상위 L7 계층까지 사용함.
+                         (필요한 서비스 별로 전계층 사용가능한 솔루션을 회사에서는 이용)
+
+     <PDU>
+     L7 data & message  
+     L6 data & message
+     L5 data & message
+     L4 TCP segment / UDP datagram
+     L3 packet (예전에는 datagram이라고 사용..ㅋㅋㅋ)
+     L2 frame
+     L1 bit, stream(묶어서)
+
+     src adr. dst adr.
+
+     physical adr. MAC ethernet LAN 16진수 48bit(6byte) [OUI(vendor informaiton):Product No.]
+     logical adr. IPv4 IP porotocol octet 32bit(4byte)
+                  - A~E class
+                  - default subnet mask by C class ( 어디까지가 NID, HID)
+                  - subnet mask 다른 표기 방식 : prefix
+                  - HID = 네트워크의 크기 : 2^8(C) 2^16(B) 2^24(A)
+                  - subnetting 처음에는 공인아이피가 아까워서 나눠쓰게 됨.
+                               broadcast domain (network 하나당 broadcast domain) 
+                               네트워크가 클 수록 브로드 캐스트 도메인이 많아져서 
+                               broadcast domain을 줄이기 위한 목적으로 요새는 많이 사용. 
+                               브로드캐스트 도메인 = 브로드캐스트 뿌렸을 때 받는 아이피
+                  - collision domain : hub(충돌도메인 나눌 수 없음)
+                                       switch(Port 하나당 따로 나누기 때문에 충돌 도메인 나눌 수 있음)
+     
+
+2. subnetting calculation
+3. 예약된 아이피
+   0.0.0.0~0.255.255.255 - NID
+   127.0.0.0~ - class A 속하지만 자신의 컴퓨터와 관련된 목적으로 사용.
+                127.0.0.1 자신의 컴퓨터 네트워크를 가리킴 (loop back)
+   169.254.0.0~ - IP를 따로 지정하지 않은 상태에서 IP 자동 구성이 실패했을 때 사용
+
+   224~239 -  D class ; revervation for multicast
+   240~254 -  E class ; 실험/연구용으로 사용
+
+   사설 IP
+   10.0.0.0 ~
+   172.16.0.0 ~ 172.31.255.255
+   169.168.0.0 ~ 
+
+4. port no.
+   어떤 서비스가 어떤 포트를 사용하는지 
+
+
+page 35,36

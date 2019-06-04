@@ -399,3 +399,4 @@ router 3계층 위에 장비 TR(보내고 받고)
 	차이점 - Hub : address 모르면 flooding 만 함.
 		Switch : ARP table 참조해서 MAC 주소를 알면 deliver 
 			 MAC address 모르면 flooding을 해주고, 그 후 주소 정보를 입수하면 learning fowarding filtering flooding aging을 통해 학습을 한다.
+
