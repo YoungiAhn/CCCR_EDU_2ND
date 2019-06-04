@@ -85,3 +85,41 @@ Quiz list
 
 
 page 35,36
+
+
+
+C:\Windows\System32\driver\etc
+DNS server 만들지 않고 
+host file 참조해서 확인. 
+
+
+https://www.iana.org/domains/root/servers
+
+DNS : tree structure  (>> >> or.kr)
+
+Whois
+
+www. - server name
+google.com - domain name
+
+
+cccr.or.kr -> name server: cafe24 ; 사설 업체
+daum.net -> 직접 구축 ; NS1.daum.net
+
+page 41 -record 종류
+
+book (83/46page)
+
+HTTP service
+
+URI (Uniform Resource Identifier)
+URL (Uniform Resource Locator)
+URN 
+
+FQDN (server(=host) name + domain name) 
+     http://
+      protocol 
+
+
+page 41 to 48 page
+
